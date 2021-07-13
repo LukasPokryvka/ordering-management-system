@@ -1,13 +1,9 @@
 import './App.scss'
-import React, { Fragment } from 'react'
-import Layout from './components/Layout'
+import React from 'react'
+import Layout from './components/Layout/Layout'
 
 function App() {
-	return (
-		<Fragment>
-			<Layout />
-		</Fragment>
-	)
+	return <Layout />
 }
 
 export default App
