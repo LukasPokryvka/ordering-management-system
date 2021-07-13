@@ -66,14 +66,11 @@ export default makeStyles((theme) => ({
 	title: {
 		color: '#333333'
 	},
-	lightButton: {
-		color: 'rgba(255, 255, 255, 0.8)'
-	},
 	lightText: {
 		color: 'rgba(255, 255, 255, 0.8)'
 	},
 	lightHover: {
-		'&:hover, &:focus': {
+		'&:hover': {
 			backgroundColor: 'rgba(255, 255, 255, 0.1)'
 		}
 	},
@@ -85,5 +82,8 @@ export default makeStyles((theme) => ({
 		'&:hover, &:focus': {
 			backgroundColor: 'transparent'
 		}
+	},
+	nested: {
+		paddingLeft: theme.spacing(4)
 	}
 }))

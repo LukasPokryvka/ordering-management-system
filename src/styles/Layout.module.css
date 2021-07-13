@@ -1,0 +1,11 @@
+.reset_link_styles {
+	text-decoration: none;
+}
+
+.reset_link_styles:focus,
+.reset_link_styles:hover,
+.reset_link_styles:visited,
+.reset_link_styles:link,
+.reset_link_styles:active {
+	text-decoration: none;
+}

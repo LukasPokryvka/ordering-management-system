@@ -17,15 +17,20 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AppsTwoToneIcon from '@material-ui/icons/AppsTwoTone'
 import AddCircleOutlineRounded from '@material-ui/icons/AddCircleOutlineRounded'
-import Accordion from '@material-ui/core/Accordion'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import useStyles from '../../functions/LayoutStyles'
+import Collapse from '@material-ui/core/Collapse'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import RestaurantMenuRoundedIcon from '@material-ui/icons/RestaurantMenuRounded'
+import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
+import { Link } from 'react-router-dom'
+import custStyles from '../../styles/Layout.module.css'
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft({ children }) {
 	const classes = useStyles()
 	const theme = useTheme()
 	const [open, setOpen] = React.useState(true)
+	const [createOpen, setCreateOpen] = React.useState(false)
 
 	const handleDrawerOpen = () => {
 		setOpen(true)
@@ -33,6 +38,10 @@ export default function PersistentDrawerLeft() {
 
 	const handleDrawerClose = () => {
 		setOpen(false)
+	}
+
+	const handleCreateOpen = () => {
+		setCreateOpen(!createOpen)
 	}
 
 	return (
@@ -70,7 +79,7 @@ export default function PersistentDrawerLeft() {
 				<div className={classes.drawerHeader}>
 					<IconButton
 						onClick={handleDrawerClose}
-						className={clsx(classes.lightButton, classes.lightHover)}
+						className={clsx(classes.lightText, classes.lightHover)}
 					>
 						{theme.direction === 'ltr' ? (
 							<ChevronLeftIcon />
@@ -80,35 +89,63 @@ export default function PersistentDrawerLeft() {
 					</IconButton>
 				</div>
 				<Divider />
-				<List>
-					<ListItem button className={classes.lightHover}>
-						<ListItemIcon className={classes.lightButton}>
-							<AppsTwoToneIcon />
-						</ListItemIcon>
-						<ListItemText className={classes.lightText} primary={'Summary'} />
-					</ListItem>
-					<Accordion
-						className={clsx(
-							classes.transparentBg,
-							classes.lightText,
-							classes.lightHover
-						)}
+				<List disablePadding className={classes.lightText}>
+					<Link
+						to="/"
+						className={clsx(custStyles.reset_link_styles, classes.lightText)}
 					>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon className={classes.lightButton} />}
-							className={classes.transparentBg}
-						>
+						<ListItem button className={classes.lightHover}>
+							<ListItemIcon className={classes.lightText}>
+								<AppsTwoToneIcon />
+							</ListItemIcon>
+							<ListItemText primary={'Summary'} />
+						</ListItem>
+					</Link>
+					<ListItem
+						button
+						className={clsx(classes.lightHover)}
+						onClick={handleCreateOpen}
+					>
+						<ListItemIcon className={classes.lightText}>
+							<AddCircleOutlineRounded />
+						</ListItemIcon>
+						<ListItemText primary={'Create'} className={classes.lightText} />
+						{createOpen ? (
+							<ExpandLess className={classes.lightText} />
+						) : (
+							<ExpandMore className={classes.lightText} />
+						)}
+					</ListItem>
+					<Collapse in={createOpen} timeout="auto" unmountOnExit>
+						<List component="div" disablePadding className={classes.lightText}>
 							<ListItem
 								button
-								className={clsx(classes.lightHover, classes.removeHover)}
+								className={clsx(classes.nested, classes.lightHover)}
 							>
-								<ListItemIcon className={classes.lightButton}>
-									<AddCircleOutlineRounded />
+								<ListItemIcon className={classes.lightText}>
+									<RestaurantMenuRoundedIcon />
 								</ListItemIcon>
-								<ListItemText primary={'Create'} />
+								<ListItemText primary="Menu" />
 							</ListItem>
-						</AccordionSummary>
-					</Accordion>
+							<Link
+								to="/create/meal"
+								className={clsx(
+									custStyles.reset_link_styles,
+									classes.lightText
+								)}
+							>
+								<ListItem
+									button
+									className={clsx(classes.nested, classes.lightHover)}
+								>
+									<ListItemIcon className={classes.lightText}>
+										<FastfoodRoundedIcon />
+									</ListItemIcon>
+									<ListItemText primary="Meal" />
+								</ListItem>
+							</Link>
+						</List>
+					</Collapse>
 				</List>
 			</Drawer>
 			<main
@@ -117,6 +154,7 @@ export default function PersistentDrawerLeft() {
 				})}
 			>
 				<div className={classes.drawerHeader} />
+				{children}
 			</main>
 		</div>
 	)
