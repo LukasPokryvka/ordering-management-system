@@ -27,3 +27,8 @@ code {
 .MuiAccordion-root:before {
 	height: 0 !important;
 }
+
+.container {
+	width: 100%;
+	min-height: 80vh;
+}
