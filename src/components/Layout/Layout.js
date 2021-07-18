@@ -26,7 +26,7 @@ import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded'
 import { Link } from 'react-router-dom'
 import custStyles from '../../styles/Layout.module.css'
 
-export default function PersistentDrawerLeft({ children }) {
+const PersistentDrawerLeft = ({ children }) => {
 	const classes = useStyles()
 	const theme = useTheme()
 	const [open, setOpen] = React.useState(true)
@@ -159,3 +159,5 @@ export default function PersistentDrawerLeft({ children }) {
 		</div>
 	)
 }
+
+export default PersistentDrawerLeft

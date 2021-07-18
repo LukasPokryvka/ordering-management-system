@@ -69,9 +69,9 @@ const CreateMeal = () => {
 						</div>
 						<div className={styles.allergens}>
 							<FormControl className={classes.formControl}>
-								{/* <InputLabel id="demo-mutiple-checkbox-label">
+								<InputLabel id="demo-mutiple-checkbox-label">
 									Allergens
-								</InputLabel> */}
+								</InputLabel>
 								<Select
 									labelId="demo-mutiple-checkbox-label"
 									id="demo-mutiple-checkbox"
